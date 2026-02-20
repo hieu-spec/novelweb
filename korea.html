@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Truyện Hàn Quốc</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="list-page">
+
+  <div class="list-header">
+    <h1>🇰🇷 Truyện Hàn Quốc</h1>
+    <a href="index.html" class="back-btn">← Trang chủ</a>
+  </div>
+
+  <!-- Thanh tìm kiếm -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Tìm truyện...">
+  </div>
+
+  <div class="list-vertical">
+
+    <a class="story-item" href="stories/thientai/thientai.html">
+      <img src="images/thientai.jpg">
+      <div class="story-info">
+        <h3>Thiên Tài Tốc Biến</h3>
+        <p>Hành động • Hệ thống</p>
+        <span class="progress-text" data-story="thientai"></span>
+      </div>
+      <div class="story-more">⋮</div>
+    </a>
+
+  </div>
+
+</div>
+
+<!-- Hiển thị tiến độ đọc -->
+<script>
+document.addEventListener("DOMContentLoaded", async function(){
+
+  const progress = JSON.parse(localStorage.getItem("readingProgress")) || {};
+
+  document.querySelectorAll(".progress-text").forEach(async el=>{
+    const story = el.dataset.story;
+
+    try{
+      const res = await fetch(`stories/${story}/chapters.json`);
+      const list = await res.json();
+      const total = list.length;
+
+      const read = progress[story] ?? 0;
+
+      el.textContent = `Đã đọc ${read}/${total} chương`;
+    }catch(e){
+      el.textContent = "Không tải được dữ liệu";
+    }
+  });
+
+});
+</script>
+
+<!-- Tìm kiếm realtime -->
+<script>
+document.getElementById("searchInput").addEventListener("input", function() {
+  const keyword = this.value.toLowerCase();
+  const stories = document.querySelectorAll(".story-item");
+
+  stories.forEach(story => {
+    const title = story.querySelector("h3").textContent.toLowerCase();
+
+    if (title.includes(keyword)) {
+      story.style.display = "flex";
+    } else {
+      story.style.display = "none";
+    }
+  });
+});
+</script>
+
+</body>
+</html>

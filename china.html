@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Truyện Trung Quốc</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="list-page">
+
+  <div class="list-header">
+    <h1>🇨🇳 Truyện Trung Quốc</h1>
+    <a href="index.html" class="back-btn">← Trang chủ</a>
+  </div>
+  <div class="search-box">
+  <input type="text" id="searchInput" placeholder="Tìm truyện...">
+</div>
+  <div class="list-vertical">
+
+  <a class="story-item" href="stories/quangamchingoai/quangamchingoai.html">
+    <img src="images/quangamchingoai.jpg">
+    <div class="story-info">
+      <h3>Quang Âm Chi Ngoại</h3>
+      <p>Huyền huyễn • Tiên hiệp</p>
+      <span class="progress-text"
+      data-story="quangamchingoai">
+</span>
+    </div>
+    <div class="story-more">⋮</div>
+  </a>
+
+
+  <a class="story-item" href="stories/daiphungdacanhnhan/daiphungdacanhnhan.html">
+    <img src="images/daiphungdacanhnhan.jpg">
+    <div class="story-info">
+      <h3>Đại Phụng Đả Cảnh Nhân</h3>
+      <p>Trinh thám • Tiên hiệp</p>
+      <span class="progress-text"
+      data-story="daiphungdacanhnhan">
+</span>
+    </div>
+    <div class="story-more">⋮</div>
+  </a>
+
+</div>
+
+</div>
+
+<script>
+document.getElementById("searchInput").addEventListener("input", function() {
+  const keyword = this.value.toLowerCase();
+  const stories = document.querySelectorAll(".story-item");
+
+  stories.forEach(story => {
+    const title = story.querySelector("h3").textContent.toLowerCase();
+
+    if (title.includes(keyword)) {
+      story.style.display = "flex";
+    } else {
+      story.style.display = "none";
+    }
+  });
+});
+</script>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const progress = JSON.parse(localStorage.getItem("readingProgress")) || {};
+
+  document.querySelectorAll(".progress-text").forEach(el=>{
+    const story = el.dataset.story;
+    const total = el.dataset.total;
+    const read = progress[story] ?? 0;
+
+    el.textContent = `Đã đọc ${read}/${total} chương`;
+  });
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", async function(){
+
+  const progress = JSON.parse(localStorage.getItem("readingProgress")) || {};
+
+  document.querySelectorAll(".progress-text").forEach(async el=>{
+    const story = el.dataset.story;
+
+    try{
+      const res = await fetch(`stories/${story}/chapters.json`);
+      const list = await res.json();
+      const total = list.length;
+
+      const read = progress[story] ?? 0;
+
+      el.textContent = `Đã đọc ${read}/${total} chương`;
+    }catch(e){
+      el.textContent = "Không tải được dữ liệu";
+    }
+  });
+
+});
+</script>
+</html>

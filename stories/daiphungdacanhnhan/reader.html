@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đọc truyện</title>
+<link rel="stylesheet" href="../../style.css">
+
+<style>
+/* ================= MOBILE ================= */
+@media (max-width:768px){
+
+  .reader-top{
+    flex-wrap:wrap;
+    gap:6px;
+    padding:8px;
+  }
+
+  .reader-top button,
+  .reader-top a{
+    padding:6px 10px;
+    font-size:13px;
+  }
+
+  #chapterSelect{
+    flex:1;
+    min-width:120px;
+    font-size:13px;
+  }
+
+  .reader-content{
+    font-size:18px !important;
+    line-height:1.7;
+    padding:0 14px;
+  }
+
+  .note-panel{
+    width:100%;
+  }
+
+  .note-btn{
+    bottom:80px;
+    right:20px;
+  }
+
+  .scroll-top-btn{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    padding:0;
+    font-size:18px;
+  }
+}
+
+/* Scroll button base */
+.scroll-top-btn{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  padding:12px 18px;
+  border-radius:25px;
+  border:none;
+  background:#111;
+  color:white;
+  font-size:14px;
+  display:none;
+  z-index:999;
+  cursor:pointer;
+  transition:.2s;
+  box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+.scroll-top-btn:hover{
+  transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar">
+  <div id="progress"></div>
+</div>
+
+<div class="reader-top">
+  <button id="prevBtn">◀</button>
+  <select id="chapterSelect"></select>
+  <button id="nextBtn">▶</button>
+  <button id="fontMinus">A-</button>
+  <button id="fontPlus">A+</button>
+  <button id="toggleNotes">📌</button>
+  <button id="ttsToggle">🔊 Đọc</button>
+  <a href="daiphungdacanhnhan.html" class="back-btn">Trang truyện</a>
+</div>
+
+<div class="reader">
+  <div id="content" class="reader-content">Đang tải...</div>
+</div>
+
+<div class="note-panel" id="notePanel">
+  <div class="note-header">
+    <h3>📌 Ghi chú</h3>
+    <button id="closeNotePanel">✕</button>
+  </div>
+  <div id="noteList"></div>
+</div>
+
+<button id="noteBtn" class="note-btn">Ghi chú</button>
+
+<div class="note-modal" id="noteModal">
+  <div class="note-modal-box">
+    <h3>📌 Thêm ghi chú</h3>
+    <textarea id="noteInput" placeholder="Nhập nội dung ghi chú..."></textarea>
+    <div class="note-modal-actions">
+      <button id="noteCancel">Huỷ</button>
+      <button id="noteSave">Lưu</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async function(){
+
+  const customAlert = document.getElementById("customAlert");
+  const alertMessage = document.getElementById("alertMessage");
+  const alertOkBtn = document.getElementById("alertOkBtn");
+
+  function showAlert(message){
+    alertMessage.innerText = message;
+    customAlert.style.display = "flex";
+  }
+
+  alertOkBtn.onclick = ()=> customAlert.style.display="none";
+
+  const select = document.getElementById("chapterSelect");
+  const content = document.getElementById("content");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const fontPlus = document.getElementById("fontPlus");
+  const fontMinus = document.getElementById("fontMinus");
+  const progress = document.getElementById("progress");
+
+  const notePanel = document.getElementById("notePanel");
+  const toggleNotes = document.getElementById("toggleNotes");
+  const closeNotePanel = document.getElementById("closeNotePanel");
+  const noteBtn = document.getElementById("noteBtn");
+  const noteModal = document.getElementById("noteModal");
+  const noteInput = document.getElementById("noteInput");
+  const noteSave = document.getElementById("noteSave");
+  const noteCancel = document.getElementById("noteCancel");
+  const noteList = document.getElementById("noteList");
+
+  let fontSize = 19;
+  let chapters = [];
+  let extras = [];
+  let fullList = [];
+  let currentIndex = 0;
+  let selectedText = "";
+  let selectedRange = null;
+
+  // Lấy tên thư mục truyện làm storyId
+  const storyId = window.location.pathname.split("/").slice(-2)[0];
+  chapters = await fetch("chapters.json").then(r=>r.json());
+  extras = await fetch("extras.json").then(r=>r.json()).catch(()=>[]);
+
+  fullList = [
+    ...chapters.map((c,i)=>({type:"chapter", file:c.file, title:"Chương "+(i+1)})),
+    ...extras.map((e,i)=>({type:"extra", file:e.file, title:"Ngoại truyện "+(i+1)}))
+  ];
+
+  fullList.forEach((item,i)=>{
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = item.title;
+    select.appendChild(opt);
+  });
+
+  let param = new URLSearchParams(location.search).get("chap");
+  if(param){
+    if(param.startsWith("extra-")){
+      currentIndex = chapters.length + parseInt(param.replace("extra-",""));
+    } else {
+      currentIndex = parseInt(param);
+    }
+  }
+
+  if(isNaN(currentIndex))
+    currentIndex = parseInt(localStorage.getItem("lastChapter")) || 0;
+
+  await load(currentIndex);
+
+  async function load(index){
+    if(index<0 || index>=fullList.length) return;
+      // ===== LƯU TIẾN ĐỘ ĐỌC =====
+let readingProgress = JSON.parse(localStorage.getItem("readingProgress")) || {};
+
+// luôn lưu chương đang mở
+readingProgress[storyId] = index;
+
+localStorage.setItem("readingProgress", JSON.stringify(readingProgress));
+    currentIndex = index;
+
+    const text = await fetch(fullList[index].file).then(r=>r.text());
+    content.innerText = text;
+    select.value = index;
+
+    document.querySelector(".reader")
+      .setAttribute("data-chapter", fullList[index].title);
+
+    window.scrollTo(0,0);
+    // Khôi phục vị trí scroll nếu có
+const scrollKey = `scroll_${storyId}_${index}`;
+const savedScroll = localStorage.getItem(scrollKey);
+if(savedScroll){
+  setTimeout(()=>{
+    window.scrollTo(0, parseInt(savedScroll));
+  }, 100);
+}
+    if(fullList[index].type==="extra"){
+      history.replaceState(null,"","?chap=extra-"+(index-chapters.length));
+    } else {
+      history.replaceState(null,"","?chap="+index);
+      localStorage.setItem("lastChapter", index);
+    }
+
+    renderNotes();
+  }
+
+  select.addEventListener("change", ()=> load(parseInt(select.value)));
+  prevBtn.addEventListener("click", ()=> load(currentIndex-1));
+  nextBtn.addEventListener("click", ()=> load(currentIndex+1));
+
+  fontPlus.onclick=()=>{fontSize+=2;content.style.fontSize=fontSize+"px";}
+  fontMinus.onclick=()=>{fontSize-=2;content.style.fontSize=fontSize+"px";}
+
+  window.addEventListener("scroll", ()=>{
+    // Lưu vị trí cuộn
+const scrollKey = `scroll_${storyId}_${currentIndex}`;
+localStorage.setItem(scrollKey, window.scrollY);
+    const percent = (window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+    progress.style.width = percent+"%";
+  });
+
+  toggleNotes.onclick=()=>notePanel.classList.toggle("open");
+  closeNotePanel.onclick=()=>notePanel.classList.remove("open");
+
+  noteBtn.onclick=()=>{
+    const sel = window.getSelection();
+    if(!sel || !sel.toString().trim()){
+      showAlert("Bạn phải bôi đen đoạn văn trước khi ghi chú!");
+      return;
+    }
+    selectedText = sel.toString();
+    selectedRange = sel.getRangeAt(0);
+    noteInput.value="";
+    noteModal.style.display="flex";
+  };
+
+  noteCancel.onclick=()=>noteModal.style.display="none";
+
+  noteSave.onclick=()=>{
+    const noteText = noteInput.value.trim();
+    if(!noteText) return;
+
+    const id = Date.now();
+    const span = document.createElement("span");
+    span.className="highlight";
+    span.dataset.noteId=id;
+    span.textContent=selectedText;
+
+    selectedRange.deleteContents();
+    selectedRange.insertNode(span);
+
+    let notes = JSON.parse(localStorage.getItem("notes")||"[]");
+   notes.push({ id, chapter:currentIndex, story:storyId, text:selectedText, note:noteText });
+    localStorage.setItem("notes",JSON.stringify(notes));
+
+    noteModal.style.display="none";
+    renderNotes();
+  };
+
+  function renderNotes(){
+    noteList.innerHTML="";
+    let notes = JSON.parse(localStorage.getItem("notes")||"[]");
+
+    notes.filter(n=>n.story===storyId)
+    .forEach(n=>{
+      const div=document.createElement("div");
+      div.className="note-item";
+
+      div.innerHTML=`
+        <div><strong>${n.text}</strong></div>
+        <div>${n.note}</div>
+        <button class="delete-note">X</button>
+      `;
+
+      div.querySelector("strong").onclick = async ()=>{
+        await load(n.chapter);
+        setTimeout(()=>{
+          const el=document.querySelector(`[data-note-id="${n.id}"]`);
+          if(el) el.scrollIntoView({behavior:"smooth",block:"center"});
+        },200);
+      };
+
+      div.querySelector(".delete-note").onclick=()=>{
+        let updated = notes.filter(note=>note.id!==n.id);
+        localStorage.setItem("notes",JSON.stringify(updated));
+        renderNotes();
+      };
+
+      noteList.appendChild(div);
+    });
+  }
+
+  // ===== SCROLL TO TOP =====
+  const scrollBtn=document.createElement("button");
+  scrollBtn.innerHTML="⬆";
+  scrollBtn.className="scroll-top-btn";
+  document.body.appendChild(scrollBtn);
+
+  window.addEventListener("scroll",()=>{
+    scrollBtn.style.display=window.scrollY>400?"block":"none";
+  });
+
+  scrollBtn.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+
+//-SPEECH-//
+/* =====================
+   TEXT TO SPEECH
+===================== */
+const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+let isReading = false;
+let utterance;
+let textChunks = [];
+let chunkIndex = 0;
+
+function splitText(text){
+  // Tách theo câu cho mobile
+  if(isMobile){
+    return text.match(/[^\.!\?]+[\.!\?]+|[^\.!\?]+$/g) || [];
+  }
+
+  // PC giữ kiểu chunk lớn
+  const maxLength = 2000;
+  let chunks = [];
+  while(text.length > 0){
+    chunks.push(text.slice(0, maxLength));
+    text = text.slice(maxLength);
+  }
+  return chunks;
+}
+
+
+function getVietnameseVoice(){
+  return new Promise(resolve => {
+    let voices = speechSynthesis.getVoices();
+
+    if (voices.length) {
+      resolve(voices.find(v => v.lang === "vi-VN"));
+    } else {
+      speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+        resolve(voices.find(v => v.lang === "vi-VN"));
+      };
+    }
+  });
+}
+
+
+async function speakChunk(){
+  if(chunkIndex >= textChunks.length){
+    if(isReading && currentIndex < fullList.length - 1){
+      nextBtn.click();
+    } else {
+      isReading = false;
+      ttsBtn.innerText = "🔊 Đọc";
+    }
+    return;
+  }
+
+  utterance = new SpeechSynthesisUtterance(textChunks[chunkIndex]);
+
+  const voice = await getVietnameseVoice();
+  if(voice){
+    utterance.voice = voice;
+  }
+
+  utterance.rate = 1;
+  utterance.pitch = 1.1;
+
+  utterance.onend = () => {
+    chunkIndex++;
+    if(isReading) speakChunk();
+  };
+
+  speechSynthesis.speak(utterance);
+}
+
+function cleanText(text){
+  return text
+    .replace(/["“”‘’']/g, "")      // bỏ ngoặc kép và nháy
+    .replace(/…/g, ".")            // ba chấm → dấu chấm
+    .replace(/—/g, " ")            // gạch ngang dài bỏ đi
+    .replace(/\s+/g, " ");         // xoá khoảng trắng thừa
+}
+
+
+function startReading(){
+  speechSynthesis.cancel();
+  let text = content.innerText.trim();
+  if(!text) return;
+
+  text = cleanText(text);   // thêm dòng này
+
+  textChunks = splitText(text);
+  chunkIndex = 0;
+  speakChunk();
+}
+
+
+const ttsBtn = document.getElementById("ttsToggle");
+
+ttsBtn.onclick = () => {
+
+  // ===== MOBILE =====
+ if(isMobile){
+
+  if (!isReading) {
+    isReading = true;
+    ttsBtn.innerText = "⏸ Tạm dừng";
+    startReading();   // luôn đọc lại text hiện tại
+    return;
+  }
+
+  // Tạm dừng
+  isReading = false;
+  speechSynthesis.cancel();
+  ttsBtn.innerText = "▶ Tiếp tục";
+  return;
+}
+
+
+  // ===== PC =====
+  if (!isReading) {
+    isReading = true;
+    ttsBtn.innerText = "⏸ Tạm dừng";
+    startReading();
+    return;
+  }
+
+  if (speechSynthesis.speaking && !speechSynthesis.paused) {
+    speechSynthesis.pause();
+    ttsBtn.innerText = "▶ Tiếp tục";
+    return;
+  }
+
+  if (speechSynthesis.paused) {
+    speechSynthesis.resume();
+    ttsBtn.innerText = "⏸ Tạm dừng";
+    return;
+  }
+
+};
+
+
+
+/* Tự đọc tiếp khi chuyển chương */
+const oldLoad = load;
+load = async function(index){
+
+  // Dừng TTS hiện tại
+  speechSynthesis.cancel();
+
+  await oldLoad(index);
+
+  // Nếu đang đọc thì tự đọc tiếp chương mới
+  if(isReading){
+    setTimeout(startReading, 500);
+  }else{
+    chunkIndex = 0;
+    textChunks = [];
+    ttsBtn.innerText = "🔊 Đọc";
+  }
+
+};
+
+
+
+});
+</script>
+
+<div class="custom-alert" id="customAlert">
+  <div class="custom-alert-box">
+    <div class="alert-icon">⚠</div>
+    <div class="alert-message" id="alertMessage"></div>
+    <button class="alert-ok" id="alertOkBtn">OK</button>
+  </div>
+</div>
+
+</body>
+</html>

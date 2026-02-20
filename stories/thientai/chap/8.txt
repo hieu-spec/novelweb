@@ -1,0 +1,132 @@
+Trong game, đoạn chuyển cảnh vốn rất đơn giản:
+[Sau khi thoát khỏi truy binh, bạn đã đặt chân đến ma đô ‘Arcanium’.]
+Chỉ vậy là xong.
+Nhưng ở thế giới thật thì khác. Dù là đổi bối cảnh hay đổi “map”, tôi đều phải tự mình đi hết quãng đường đó.
+May mắn là bối cảnh nơi đây gần với thời hiện đại hơn là trung cổ, nên tôi không phải đung đưa trên lưng ngựa mấy ngày liền.
+Tàu hoả chỉ được vận hành ở những thành phố an toàn, nơi ma vật đã bị tiêu diệt hoàn toàn.
+ Ngoài ra, trên khinh khí hạm và một số thành phố trọng điểm còn có “Đại Sảnh Dịch Chuyển (Warp Hall)” dùng cho di chuyển siêu xa.
+May là không có truy binh chạy theo nữa…
+Tôi biết rất rõ thân phận của bọn chúng.
+Trên truyền thông, người ta cảnh báo “thổ phỉ” thường xuyên hoành hành, cướp phá các làng lân cận.
+ Nhưng về sau mới lộ ra — đó là trò của “Giáo Đoàn Hắc Ma” (Dark Demon Church), nhằm bắt tế phẩm từ rất sớm.
+Nhưng, từ lúc qua được vách đá, đây đã là địa bàn của pháp sư.
+Tên Hắc Ma kia không thể đuổi theo nữa.
+ Chúng vốn xem tôi là tế phẩm, lại chẳng biết tôi là ai, nên về sau cũng khó mà lần được dấu.
+Nhờ vậy, ít nhất hiện giờ tôi có thể tạm thả lỏng.
+Nhờ nhóm pháp sư này, tôi được ngồi trên một chiếc xe ngựa tự hành — lắc lư nhiều hơn ô tô hiện đại một chút.
+“Ồ, lần đầu cậu lên thành phố à?”
+“Rốt cuộc cậu học kiểu ma pháp đó ở đâu vậy?”
+Không biết trả lời sao, tôi chỉ mỉm cười.
+Trong giới pháp sư có một luật ngầm: nếu bị hỏi về ma pháp mà chỉ cười nhẹ, nghĩa là phía sau lưng có “cao nhân chỉ điểm”, mọi người tự hiểu mà ngừng hỏi.
+“Thế thì tốt rồi.”
+“Dù gì điểm đến cũng trùng nhau. Bọn tôi đang trên đường tới Rezoica, một trong 12 thành phố vệ tinh của Arcanium.”
+Học viện Stella nằm ở Arcanium.
+ Tôi thật sự mừng vì không phải một mình mò đường đến đó nữa.
+Trên đường đi, tôi tranh thủ hỏi họ đủ thứ về thế giới này: từ sinh hoạt hằng ngày, văn hoá địa phương cho tới mấy chuyện lặt vặt.
+Lúc hỏi đến đơn vị tiền tệ, có người còn bĩu môi: “Trời ơi, đúng kiểu nhà quê chính hiệu.” Nhưng tôi cũng chẳng bận tâm.
+Thà bị chê quê một lần, còn hơn sau này bị người ta bắt nạt vì không biết gì.
+“Thôi, sao cậu không ngủ một chút đi. Khinh khí hạm đi Arcanium khởi hành lúc 8 giờ sáng mai. Đến Rezoica trước đó là kịp.”
+“Này, cậu sao rồi?”
+“Ngủ được không?”
+Tôi quay lại theo hướng tay một pháp sư chỉ.
+ Cô gái áo choàng xám — vị khách đi nhờ xe cùng bọn tôi — đang co người lại ở góc toa, cố gắng chợp mắt.
+“Vậy… tôi xin phép nghỉ một chút.”
+“Được thôi. Sau này cậu chắc chắn sẽ làm nên chuyện lớn, nhớ đừng quên mấy ông anh đây là được.”
+“Vâng, tất nhiên rồi.”
+Nhờ họ nhường chỗ, tôi có thể nằm dài ra hàng ghế sau. Trước khi nhắm mắt, tôi ngước nhìn bầu trời rộng phía trên.
+Nãy giờ các sự kiện cứ dồn dập, thông tin mới tràn vào liên tục nên tôi chẳng có lúc nào rảnh. Giờ ưu tiên số một là kiểm tra lại tình trạng cơ thể.
+… Cơ bắp này không đùa được đâu.
+Theo thiết lập game, tuổi hiện tại của tôi trẻ hơn ngoài đời gần mười năm, gương mặt cũng non hơn nhiều.
+Không chỉ vậy, thân thể này còn… săn chắc hơn hẳn bản gốc — mà bản gốc của tôi thì chưa bao giờ động vào tạ.
+Bây giờ tôi có ngực nở, bụng có múi rõ ràng.
+Do tuổi còn nhỏ nên chiều cao vẫn chưa chạm mức 1m80 như trước kia, nhưng nếu ăn uống tử tế, tôi tin mình sẽ lại cao lên.
+Tiếp theo, tôi mở “Bảng Kỹ Năng”.
+[Trì Trệ Tích Lũy Ma Lực Lv.1]
+ [Sức mạnh: +03%]
+ [Thân pháp: +05%]
+ [Giác quan: +10%]
+ [Lục Cảm]: Kích hoạt bằng cách tiêu hao tinh lực. Hiệu quả trong bán kính 12m.
+ [Gia Tốc Nhận Thức]: Kích hoạt khi cảm nhận mana. Tự động phát động khi hệ thống đánh giá người dùng đang ở trong tình huống nguy hiểm.
+Đây là đặc tính thứ hai của nhân vật Baek Yu-Seol — Trì Trệ Tích Lũy Ma Lực, kẻ đã biến tôi thành “thái giám ma pháp”.
+Trớ trêu thay, giờ nghĩ lại, tôi vẫn còn sống được là nhờ chính thứ thể chất quái gở này.
+Lục Cảm và Gia Tốc Nhận Thức… Không có chúng, chắc mình đã chết từ lâu rồi.
+Lục Cảm cho phép tôi cảm nhận hướng tấn công mà không cần quay đầu.
+ Gia Tốc Nhận Thức thì đẩy tốc độ suy nghĩ lên cực hạn, khiến thời gian như chậm lại trong những tình huống nguy hiểm vượt quá khả năng phản ứng thông thường của con người.
+Tất cả đều là hiệu ứng thụ động phát sinh từ trạng thái “rò rỉ mana”.
+Có điều, Lục Cảm dường như không thể duy trì lâu.
+Có thể vì hao tổn tinh thần, nên sau trận chiến, tôi đau đầu dữ dội.
+Dù sao… vẫn may vì Trì Trệ Tích Lũy Ma Lực tăng toàn bộ chỉ số cơ bản của mình.
+Tôi mở bảng trạng thái tổng thể:
+[Baek Yu-Seol]
+[Chỉ số]
+ Sức mạnh: 1 sao (59%)
+ Giác quan: 1 sao (97%)
+ Thân pháp: 1 sao (81%)
+ Thể lực: 1 sao (51%)
+ Bền bỉ: 0 sao (97%)
+ Tinh thần: 1 sao (43%)
+ Mana: ~
+[EXP còn lại: 10]
+[Kỹ năng]
+ Flash Lv.0
+[Đặc tính]
+ Trì Trệ Tích Lũy Ma Lực Lv.1
+Một trong những nét đặc trưng của Aether World là không có cấp độ nhân vật, chỉ có cấp độ chỉ số và kỹ năng.
+Kỹ năng được chia theo Level (Lv.), còn chỉ số được chia theo Sao.
+Theo hệ thống, chỉ số có thể nâng tối đa đến 9 sao, nhưng trong lịch sử Aether World thì những nhân vật chạm đến mức đó hiếm vô cùng.
+Chơi game hơn mười năm, chỉ số cao nhất tôi từng nâng được là Sức mạnh 8 sao và Giác quan 8 sao.
+9 sao là cảnh giới “thần minh phù hộ”.
+Nhưng mà… chỉ số khởi đầu của mình đang hơi bị ngon thì phải?
+Trung bình, sức mạnh của đàn ông trưởng thành là [1 sao (0%)].
+Đạt 1 sao (20%) thì được khuyên là nên tập luyện.
+ Tập tành lên 1 sao (40%), cơ thể sẽ trở nên rõ cơ, dễ nhận những lời kiểu: “Ồ, người này khoẻ ghê.”
+Ngược lại, tụt xuống [0 sao] là gầy yếu, bệnh tật.
+Đa số pháp sư bắt đầu với chỉ số sức mạnh và bền bỉ ở mức 0 sao.
+ Còn Baek Yu-Seol lại khởi đầu với [1 sao (10%)] — đã là hơn trung bình.
+Nhưng bây giờ, thân thể tôi… còn tốt hơn cả mức khởi đầu chuẩn của nhân vật.
+Có vẻ mình được “ăn ké” một phần chỉ số từ account cũ đã cày mười năm, nhất là ở khoản Giác quan.
+Baek Yu-Seol bản gốc vốn có chỉ số Giác quan rất thấp.
+ Còn tôi thì đã đổ mồ hôi suốt 10 năm để đẩy nó lên.
+Thoạt nhìn, việc “thừa hưởng” chỉ số có vẻ chẳng đáng gì, nhưng so với việc phải bắt đầu từ zero, thế này vẫn là may mắn.
+Sau một hồi suy tính, tôi dồn hết EXP vào Giác quan (Sense).
+Giác quan vừa tăng hiệu quả của Lục Cảm, vừa nâng tốc độ phản xạ — vốn đã rất quan trọng trong game, nay trong đời thật lại càng cần thiết.
+[Giác quan: 2 sao (07%)]
+Sức mạnh, bền bỉ, thân pháp còn có thể luyện bằng cơ thể.
+ Riêng Giác quan thì… ngoài EXP ra, gần như không có cách nào dễ dàng để tăng lên.
+Nhìn qua lại giữa bảng trạng thái và dòng Trì Trệ Tích Lũy Ma Lực, tôi thở dài.
+Như đã nói, mục tiêu cuối cùng của tôi là đánh bại Ma Long Hắc Vương và cứu thế giới. Nếu tiện thể chạm được True Ending luôn thì càng tốt.
+Sau đó, quay lại Trái Đất hay sống yên ổn ở đây — với tôi cũng không khác biệt lắm.
+Điều quan trọng là: liệu tôi có thể sử dụng “hệ thống game” trong thế giới này hay không.
+Ở Trái Đất, tôi mạnh lên được chỉ vì đó là game: có EXP, có đồ farm, có dungeon để cày, có chế đồ để sống.
+ Thậm chí tôi từng đánh đổi cả các mối quan hệ ngoài đời chỉ để lấy vài món đồ tăng chỉ số.
+Đã có lúc tôi sẵn sàng chết đi sống lại để lấy thuốc tăng chỉ số, cày dungeon có tỉ lệ sống sót 0,01%.
+ Nhưng ở đây, chết một lần là hết game.
+Nên nghĩ tới chuyện khôi phục toàn bộ sức mạnh của nhân vật cũ… đúng là mơ mộng hão huyền.
+Ngay cả khi có thể lấy lại mọi chỉ số, trong cốt truyện vẫn có những kẻ mạnh hơn tôi.
+Tương lai… không hề sáng sủa.
+Có sơ hở nào trong hệ thống mình có thể lợi dụng không?
+Trong đầu ào tới rất nhiều thứ — nhưng còn nhiều hơn nữa những thứ tôi… không nhớ nổi.
+Tôi vốn không phải thiên tài, trí nhớ lại càng không tốt, mà 10 năm thì dài thật sự.
+Đã có lúc tôi nghĩ: hay là mặc kệ hết.
+ Ra vùng quê nào đó, tìm một cô gái hiền, trồng khoai trồng đậu, sống an nhàn đến cuối đời…
+Nhưng kiểu mơ mộng ấy là điều không thể.
+Bởi vì Trì Trệ Tích Lũy Ma Lực gần như là một chứng bệnh nan y.
+ Nếu không luyện tập để điều khiển nó, tôi sẽ chết sớm vì chính thể chất của mình.
+Muốn sống, tôi phải nhanh chóng đạt đến cảnh giới “Thần Thể Tự Nhiên”.
+ Hơn nữa, phương pháp và manh mối để chữa trị Trì Trệ cũng chỉ có ở Học viện Stella.
+Để ngăn thế giới sụp đổ, và để chữa thân thể hỏng hóc của mình…
+ Tới Stella là con đường duy nhất.
+“Ừm… Rồi mình phải làm gì tiếp theo đây?”
+Đang ủ ê thì một bảng thông báo bật lên trước mắt.
+[‘Dự Án Tinh Tượng’ gửi tới bạn phần thưởng đặc biệt.]
+ [1. Phiên bản giảm cấp của một vật phẩm trong game.]
+ [2. Phiên bản giảm cấp của một kỹ năng trong game.]
+ [3. EXP.]
+“… Ồ.”
+Xem ra “những người” đã lôi tôi sang đây vẫn còn chút… lương tâm.
+[Bạn có muốn chọn phần thưởng ngay bây giờ không?]
+Tôi nghĩ một lát.
+ Nhưng ngoài trời đã khuya, mí mắt cũng trĩu xuống.
+Để mai tính.
+Ngày đầu tiên ở thế giới xa lạ.
+Có lẽ vì mọi chuyện quá sức căng thẳng, nên tôi chìm vào giấc ngủ dễ dàng hơn mình tưởng.

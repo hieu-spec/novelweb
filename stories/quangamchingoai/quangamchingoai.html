@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Quang Âm Chi Ngoại</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+<!-- HERO -->
+<section class="story-hero" style="background-image:url('../../images/quangamchingoai1.jpg')">
+  <div class="story-box">
+
+    <img src="../../images/quangamchingoai.jpg" class="story-cover">
+
+    <div class="story-meta">
+      <h1>Quang Âm Chi Ngoại</h1>
+
+      <div class="tags">
+        <span>Tiên hiệp</span>
+        <span>Tu tiên</span>
+        <span>Huyền ảo</span>
+        <span>Trường sinh</span>
+      </div>
+
+      <div class="story-stats">
+        ⭐ 4.9/5  
+        📖 <span id="chapterCountTop">...</span>  
+        👁 Đang cập nhật  
+        🔥 Đang tiến hành
+      </div>
+
+      <div style="margin-top:25px;">
+  <a class="read-btn" href="reader.html?chap=0">Đọc từ đầu</a>
+
+  <a class="read-btn" id="continueBtn"
+     style="background:#ff7a5c; margin-left:10px; display:none;">
+     Đọc tiếp
+  </a>
+
+  <a class="secondary-btn" href="../../index.html">← Trang chủ</a>
+</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GIỚI THIỆU -->
+<section class="story-desc">
+  <h2>Giới thiệu truyện</h2>
+
+  <p>
+    Thiên địa là quán trọ của vạn vật chúng sinh, thời gian là khách qua đường của cổ kim.
+  </p>
+
+  <p>
+    Sự khác biệt giữa sống và chết, giống như khác biệt giữa giấc mộng và sự tỉnh giác, biến đổi khôn lường, không thể dò hỏi.
+  </p>
+
+  <p>
+    Vậy vượt qua sinh tử, siêu thoát thiên địa, ở bên ngoài thời gian, thứ đang chờ đợi chúng ta là gì?
+  </p>
+
+</section>
+
+<!-- DANH SÁCH CHƯƠNG -->
+<section class="chapter-list">
+  <div class="chapter-header">
+    <h2>Danh sách chương</h2>
+    <span id="chapterCount"></span>
+  </div>
+  <div id="chapterContainer"></div>
+</section>
+
+<!-- NGOẠI TRUYỆN -->
+<section class="chapter-list">
+  <div class="chapter-header">
+    <h2>Ngoại truyện</h2>
+    <span id="extraCount"></span>
+  </div>
+  <div id="extraContainer"></div>
+</section>
+
+<!-- GHI CHÚ TOÀN TRUYỆN -->
+<section class="story-notes">
+  <h2>📌 Ghi chú của bạn</h2>
+  <div id="storyNoteList"></div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const container = document.getElementById("chapterContainer");
+  const count = document.getElementById("chapterCount");
+  const countTop = document.getElementById("chapterCountTop");
+  const noteContainer = document.getElementById("storyNoteList");
+  const extraContainer = document.getElementById("extraContainer");
+  const extraCount = document.getElementById("extraCount");
+
+  /* ===== LOAD CHAPTER LIST ===== */
+
+  fetch("chapters.json")
+    .then(res => res.json())
+    .then(list => {
+
+      container.innerHTML = ""; // đảm bảo không bị lặp
+
+      count.innerText = list.length + " chương";
+      countTop.innerText = list.length + " chương";
+
+      list.forEach((file, index) => {
+
+        const div = document.createElement("div");
+        div.className = "chapter-card";
+
+        const isNew = index === list.length - 1;
+
+        div.innerHTML = `
+          <div class="chapter-info">
+            <div class="chapter-main">
+              <span>Chương ${index + 1}</span>
+              ${isNew ? '<span class="badge-new">NEW</span>' : ''}
+            </div>
+            <div class="chapter-sub">
+              Cập nhật gần đây
+            </div>
+          </div>
+          <div class="chapter-arrow">→</div>
+        `;
+
+        div.onclick = () => {
+          location.href = "reader.html?chap=" + index;
+        };
+
+        container.appendChild(div);
+      });
+      // ===== NÚT ĐỌC TIẾP =====
+const continueBtn = document.getElementById("continueBtn");
+
+const storyId = window.location.pathname
+  .split("/")
+  .slice(-1)[0]
+  .replace(".html","");
+
+const progress = JSON.parse(localStorage.getItem("readingProgress")) || {};
+
+if(progress[storyId] !== undefined){
+
+  const chap = progress[storyId];
+
+  continueBtn.style.display = "inline-block";
+  continueBtn.href = `reader.html?chap=${chap}`;
+
+  continueBtn.textContent = `Đọc tiếp (Chương ${chap + 1})`;
+}
+    });
+
+/* ===== LOAD NGOẠI TRUYỆN ===== */
+
+fetch("extras.json")
+  .then(res => res.json())
+  .then(list => {
+
+    if(!list || list.length === 0){
+      extraContainer.innerHTML = "<p style='opacity:.6'>Hiện tại chưa có ngoại truyện nào.</p>";
+      extraCount.innerText = "";
+      return;
+    }
+
+    extraCount.innerText = list.length + " chương";
+
+    list.forEach((file, index) => {
+
+      const div = document.createElement("div");
+      div.className = "chapter-card";
+
+      div.innerHTML = `
+        <div class="chapter-info">
+          <div class="chapter-main">
+            <span>Ngoại truyện ${index + 1}</span>
+          </div>
+          <div class="chapter-sub">
+            Nội dung bổ sung
+          </div>
+        </div>
+        <div class="chapter-arrow">→</div>
+      `;
+
+      div.onclick = () => {
+        location.href = "reader.html?chap=extra-" + index;
+      };
+
+      extraContainer.appendChild(div);
+    });
+
+  })
+  .catch(() => {
+    extraContainer.innerHTML = "<p style='opacity:.6'>Hiện tại chưa có ngoại truyện nào.</p>";
+  });
+
+  /* ===== LOAD STORY NOTES ===== */
+
+  const notes = JSON.parse(localStorage.getItem("notes") || "[]");
+  const storyId = window.location.pathname.split("/").slice(-1)[0].replace(".html","");
+
+const storyNotes = notes.filter(n => n.story === storyId);
+
+  if(storyNotes.length === 0){
+    noteContainer.innerHTML = "<p style='opacity:.6'>Bạn chưa có ghi chú nào.</p>";
+  } else {
+    storyNotes.forEach(n => {
+
+      const div = document.createElement("div");
+      div.className = "story-note-item";
+
+      div.innerHTML = `
+        <div class="note-chapter">Chương ${n.chapter + 1}</div>
+        <div class="note-text"><strong>${n.text}</strong></div>
+        <div class="note-comment">${n.note}</div>
+        <button class="delete-note">Xoá</button>
+      `;
+
+      /* CLICK → MỞ ĐÚNG CHƯƠNG */
+      div.querySelector("strong").addEventListener("click", () => {
+        location.href = "reader.html?chap=" + n.chapter;
+      });
+
+      /* DELETE */
+      div.querySelector(".delete-note").addEventListener("click", () => {
+
+  // luôn đọc lại dữ liệu mới nhất
+  let allNotes = JSON.parse(localStorage.getItem("notes") || "[]");
+
+  // chỉ xoá đúng id
+  allNotes = allNotes.filter(note => note.id && note.id !== n.id);
+
+  localStorage.setItem("notes", JSON.stringify(allNotes));
+
+  location.reload();
+});
+
+
+      noteContainer.appendChild(div);
+    });
+  }
+
+});
+</script>
+
+</body>
+</html>
